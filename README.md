@@ -19,24 +19,24 @@ Telegram Scraper is a Python tool for scraping messages from a Telegram channel 
 
 First, clone the repository:
 
-\`\`\`bash
+```bash
 git clone https://github.com/yourusername/telegram-scraper.git
 cd telegram-scraper
-\`\`\`
+```
 
 Install the required Python packages:
 
-\`\`\`bash
+```bash
 pip install -r requirements.txt
-\`\`\`
+```
 
 ## Usage
 
 ### Example Script
 
-Here's an example script (\`example.py\`) to demonstrate how to use the \`TelegramScraper\` class:
+Here's an example script (`example.py`) to demonstrate how to use the `TelegramScraper` class:
 
-\`\`\`python
+```python
 from telegram_scraper import TelegramScraper
 
 def main():
@@ -58,13 +58,13 @@ def main():
 
 if __name__ == "__main__":
     main()
-\`\`\`
+```
 
 To run the example script:
 
-\`\`\`bash
+```bash
 python example.py
-\`\`\`
+```
 
 ### Class Details
 
@@ -72,45 +72,45 @@ python example.py
 
 A class for scraping messages from a Telegram channel.
 
-##### \`__init__(self, base_url, num_messages=100)\`
+##### `__init__(self, base_url, num_messages=100)`
 
-- \`base_url\` (str): The URL of the Telegram channel.
-- \`num_messages\` (int): The number of messages to retrieve.
+- `base_url` (str): The URL of the Telegram channel.
+- `num_messages` (int): The number of messages to retrieve.
 
-##### \`set_proxy(self, proxy)\`
+##### `set_proxy(self, proxy)`
 
-- \`proxy\` (str): The proxy address (e.g., \`'http://127.0.0.1:8080'\`).
+- `proxy` (str): The proxy address (e.g., `'http://127.0.0.1:8080'`).
 
 Sets the proxy for making requests.
 
-##### \`fetch_messages(self)\`
+##### `fetch_messages(self)`
 
 Fetches messages from the Telegram channel.
 
-- Returns: \`list\` of messages.
+- Returns: `list` of messages.
 
 ## Tests
 
-Unit tests for the \`TelegramScraper\` class are provided in \`test_telegram_scraper.py\`.
+Unit tests for the `TelegramScraper` class are provided in `test_telegram_scraper.py`.
 
 ### Running Tests
 
 To run the tests, use the following command:
 
-\`\`\`bash
+```bash
 python -m unittest test_telegram_scraper.py
-\`\`\`
+```
 
 ## Project Structure
 
-\`\`\`
+```
 .
 ├── telegram_scraper.py
 ├── test_telegram_scraper.py
 ├── example.py
 ├── requirements.txt
 └── README.md
-\`\`\`
+```
 
 ## License
 
