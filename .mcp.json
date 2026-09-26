@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "telegram-scraper": {
+      "command": "uvx",
+      "args": ["--from", ".[mcp]", "tgscraper-mcp"]
+    }
+  }
+}
