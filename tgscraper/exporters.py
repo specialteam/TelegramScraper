@@ -104,7 +104,7 @@ def export(messages: Iterable[Message], path: Union[str, Path], format: Optional
         try:
             from openpyxl import Workbook
         except ImportError as exc:  # pragma: no cover
-            raise ImportError("Excel export needs openpyxl: pip install 'tgscraper[excel]'") from exc
+            raise ImportError("Excel export needs openpyxl: pip install 'telegram-channel-scraper[excel]'") from exc
         wb = Workbook()
         ws = wb.active
         ws.title = "messages"

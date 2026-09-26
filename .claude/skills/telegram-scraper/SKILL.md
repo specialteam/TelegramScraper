@@ -12,7 +12,7 @@ groups, chats or bots.
 ## 0. Setup (once)
 
 ```bash
-tgscraper --version || pip install "tgscraper[all] @ git+https://github.com/specialteam/TelegramScraper"
+tgscraper --version || pip install "telegram-channel-scraper[all]"
 ```
 
 If the `telegram-scraper` MCP tools (`get_messages`, `search_messages`, `get_channel_info`,

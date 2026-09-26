@@ -5,8 +5,8 @@
 > reactions, media, hashtags, links), supports search, date/keyword filters, JSON/CSV/Excel/SQLite export,
 > incremental scraping, monitoring with webhooks, media download and analytics.
 
-Install: `pip install "tgscraper[all] @ git+https://github.com/specialteam/TelegramScraper"`
-MCP server: `uvx --from "tgscraper[mcp] @ git+https://github.com/specialteam/TelegramScraper" tgscraper-mcp`
+Install: `pip install "telegram-channel-scraper[all]"`
+MCP server: `uvx --from "telegram-channel-scraper[mcp]" tgscraper-mcp`
 
 ## Docs
 - [README](README.md): features, CLI, Python API, MCP setup for Claude/Cursor/VS Code, Docker, FAQ

@@ -3,7 +3,7 @@ requires = ["setuptools>=64"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "tgscraper"
+name = "telegram-channel-scraper"
 version = "2.0.0"
 description = "Scrape public Telegram channels without API keys or login — Python library, CLI, MCP server for AI agents, and dashboard."
 readme = "README.md"
@@ -29,8 +29,8 @@ dependencies = ["httpx[socks]>=0.27", "beautifulsoup4>=4.11"]
 excel = ["openpyxl>=3.1"]
 mcp = ["mcp>=1.2; python_version>='3.10'"]
 dashboard = ["streamlit>=1.35"]
-all = ["tgscraper[excel,mcp,dashboard]"]
-dev = ["tgscraper[excel,mcp]", "pytest>=7", "pytest-asyncio>=0.23", "respx>=0.21", "flake8"]
+all = ["telegram-channel-scraper[excel,mcp,dashboard]"]
+dev = ["telegram-channel-scraper[excel,mcp]", "pytest>=7", "pytest-asyncio>=0.23", "respx>=0.21", "flake8"]
 
 [project.scripts]
 tgscraper = "tgscraper.cli:main"
