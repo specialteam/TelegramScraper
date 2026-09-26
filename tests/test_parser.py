@@ -43,7 +43,7 @@ def test_parse_page(page1):
     assert m98.hashtags == ["BTC", "crypto"]
     assert m98.mentions == ["someuser"]
     assert m98.links == ["https://example.com/a"]
-    assert m98.reactions == {"👍": 1500, "🔥": 320}
+    assert m98.reactions == {"👍": 1500, "🔥": 320, "❤": 2000, "custom:5368324170671202286": 15, "⭐": 7}
     assert [(x.type, x.url) for x in m98.media] == [("photo", "https://cdn4.telesco.pe/file/p98.jpg")]
 
     # the quoted reply text must not leak into the message text

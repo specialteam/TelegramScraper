@@ -51,3 +51,11 @@ def test_scrape_many():
     for ch, res in results.items():
         assert not isinstance(res, Exception), f"{ch}: {res}"
         assert len(res) == 5
+
+
+def test_reactions_are_split_by_emoji():
+    posts = [p for p in tg.scrape(CHANNEL, limit=20) if p.reactions]
+    print([p.reactions for p in posts[:3]])
+    assert posts, "expected some posts with reactions"
+    assert any(len(p.reactions) > 1 for p in posts)
+    assert any(not k.startswith("custom") for p in posts for k in p.reactions)

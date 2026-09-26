@@ -25,6 +25,15 @@ jobs:
         TGSCRAPER_LIVE: "1"
         TGSCRAPER_LIVE_CHANNEL: ${{ inputs.channel || 'durov' }}
       run: pytest tests/test_live.py -v -s
+    - name: Show raw reaction markup
+      run: |
+        python - <<'EOF'
+        import httpx
+        from bs4 import BeautifulSoup
+        soup = BeautifulSoup(httpx.get("https://t.me/s/durov").text, "html.parser")
+        for r in soup.select(".tgme_reaction")[:6]:
+            print(r)
+        EOF
     - name: CLI against real channels
       run: |
         tgscraper info durov telegram

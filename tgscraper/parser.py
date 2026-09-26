@@ -99,16 +99,36 @@ def _parse_media(node: Tag) -> List[Media]:
     return media
 
 
+_EMOJI_IMG_RE = re.compile(r"/emoji/\d+/([0-9A-Fa-f]+)\.png")
+
+
+def _reaction_key(el: Tag) -> str:
+    """Emoji of a reaction: inline text, the hex-encoded emoji image name, or a custom emoji id."""
+    bold = el.select_one("b")
+    if bold and bold.get_text(strip=True):
+        return bold.get_text(strip=True)
+    for styled in [el] + el.find_all(style=True):
+        match = _EMOJI_IMG_RE.search(styled.get("style", "") or "")
+        if match:
+            try:
+                return bytes.fromhex(match.group(1)).decode("utf-8")
+            except ValueError:
+                pass
+    if "tgme_reaction_paid" in (el.get("class") or []):
+        return "⭐"
+    custom = el.select_one("[emoji-id]")
+    if custom is not None:
+        return f"custom:{custom['emoji-id']}"
+    return el.get("data-emoji") or "custom"
+
+
 def _parse_reactions(node: Tag) -> Dict[str, int]:
     reactions: Dict[str, int] = {}
     for el in node.select(".tgme_reaction"):
-        emoji_el = el.select_one("i.emoji b") or el.select_one("i.emoji") or el.select_one("tg-emoji")
-        emoji = emoji_el.get_text(strip=True) if emoji_el else ""
-        if emoji_el is not None:
-            emoji_el.extract()
+        emoji = _reaction_key(el)
+        for child in el.find_all(["i", "tg-emoji", "b"]):
+            child.extract()
         count = parse_count(el.get_text(strip=True))
-        if not emoji:
-            emoji = el.get("data-emoji") or "custom"
         reactions[emoji] = reactions.get(emoji, 0) + (count or 0)
     return reactions
 
