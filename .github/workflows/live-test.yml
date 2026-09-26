@@ -1,0 +1,58 @@
+name: Live test
+
+# Scrapes the real t.me to catch Telegram HTML changes.
+on:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      channel:
+        description: "Channel to test"
+        default: "durov"
+  schedule:
+    - cron: "17 6 * * 1"  # weekly
+
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+    - run: pip install -e ".[dev]"
+    - name: Live pytest
+      env:
+        TGSCRAPER_LIVE: "1"
+        TGSCRAPER_LIVE_CHANNEL: ${{ inputs.channel || 'durov' }}
+      run: pytest tests/test_live.py -v -s
+    - name: CLI against real channels
+      run: |
+        tgscraper info durov telegram
+        tgscraper durov -n 5
+        tgscraper stats durov -n 50
+        tgscraper durov -n 30 -o out/durov.xlsx
+        tgscraper durov -n 30 -o out/durov.db
+        tgscraper durov -n 3 --json | python -c "import json,sys; d=json.load(sys.stdin); print(json.dumps(d[0], ensure_ascii=False, indent=2))"
+    - name: MCP server over stdio
+      run: |
+        python - <<'EOF'
+        import asyncio
+        from mcp import ClientSession, StdioServerParameters
+        from mcp.client.stdio import stdio_client
+
+        async def main():
+            async with stdio_client(StdioServerParameters(command="tgscraper-mcp")) as (r, w):
+                async with ClientSession(r, w) as s:
+                    await s.initialize()
+                    res = await s.call_tool("get_messages", {"channel": "durov", "limit": 2})
+                    text = res.content[0].text
+                    print(text[:1500])
+                    assert '"error"' not in text, text
+
+        asyncio.run(main())
+        EOF
+    - uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: live-output
+        path: out/
