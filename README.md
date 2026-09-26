@@ -7,6 +7,7 @@
 Python library · CLI · MCP server for AI agents · Claude Skill · Web dashboard · Docker
 
 [![Tests](https://github.com/specialteam/TelegramScraper/actions/workflows/python-package.yml/badge.svg)](https://github.com/specialteam/TelegramScraper/actions)
+[![PyPI](https://img.shields.io/pypi/v/telegram-channel-scraper)](https://pypi.org/project/telegram-channel-scraper/)
 ![Python](https://img.shields.io/badge/python-3.9%2B-blue)
 ![MCP](https://img.shields.io/badge/MCP-server-8A2BE2)
 ![License](https://img.shields.io/badge/license-MIT-green)
@@ -16,7 +17,7 @@ Python library · CLI · MCP server for AI agents · Claude Skill · Web dashboa
 </div>
 
 ```bash
-pip install "tgscraper[all] @ git+https://github.com/specialteam/TelegramScraper"
+pip install "telegram-channel-scraper[all]"
 tgscraper durov
 ```
 
@@ -49,10 +50,10 @@ That's it — the latest posts of `t.me/durov`, in your terminal.
 
 ```bash
 # everything (CLI + Excel + MCP server + dashboard)
-pip install "tgscraper[all] @ git+https://github.com/specialteam/TelegramScraper"
+pip install "telegram-channel-scraper[all]"
 
 # or minimal (CLI + library only: httpx + beautifulsoup4)
-pip install "git+https://github.com/specialteam/TelegramScraper"
+pip install telegram-channel-scraper
 
 # or from a clone
 git clone https://github.com/specialteam/TelegramScraper && cd TelegramScraper && pip install -e ".[all]"
@@ -239,16 +240,16 @@ Plus prompts `summarize_channel` and `track_topic`, and the resource `telegram:/
 ### Connect it
 
 The only requirement is [uv](https://docs.astral.sh/uv/) (`pip install uv`) — `uvx` downloads and runs the server
-on demand. Or `pip install "tgscraper[mcp] @ git+…"` and use `"command": "tgscraper-mcp"` with no args.
+on demand. Or `pip install "telegram-channel-scraper[mcp]"` and use `"command": "tgscraper-mcp"` with no args.
 
 <details open>
 <summary><b>Claude Code</b></summary>
 
 ```bash
-claude mcp add telegram-scraper -- uvx --from "tgscraper[mcp] @ git+https://github.com/specialteam/TelegramScraper" tgscraper-mcp
+claude mcp add telegram-scraper -- uvx --from "telegram-channel-scraper[mcp]" tgscraper-mcp
 ```
-Inside this repository it is automatic: [`.mcp.json`](.mcp.json) registers the server and
-[`.claude/skills/telegram-scraper`](.claude/skills/telegram-scraper/SKILL.md) loads the skill.
+Inside this repository it is automatic: [`.mcp.json`](https://github.com/specialteam/TelegramScraper/blob/main/.mcp.json) registers the server and
+[`.claude/skills/telegram-scraper`](https://github.com/specialteam/TelegramScraper/blob/main/.claude/skills/telegram-scraper/SKILL.md) loads the skill.
 </details>
 
 <details>
@@ -262,7 +263,7 @@ or `~/.codeium/windsurf/mcp_config.json`:
   "mcpServers": {
     "telegram-scraper": {
       "command": "uvx",
-      "args": ["--from", "tgscraper[mcp] @ git+https://github.com/specialteam/TelegramScraper", "tgscraper-mcp"],
+      "args": ["--from", "telegram-channel-scraper[mcp]", "tgscraper-mcp"],
       "env": { "TGSCRAPER_PROXY": "" }
     }
   }
@@ -280,7 +281,7 @@ or `~/.codeium/windsurf/mcp_config.json`:
     "telegram-scraper": {
       "type": "stdio",
       "command": "uvx",
-      "args": ["--from", "tgscraper[mcp] @ git+https://github.com/specialteam/TelegramScraper", "tgscraper-mcp"]
+      "args": ["--from", "telegram-channel-scraper[mcp]", "tgscraper-mcp"]
     }
   }
 }
@@ -299,7 +300,7 @@ Environment variables: `TGSCRAPER_PROXY` (proxy URL for all requests), `TGSCRAPE
 
 ### Claude Skill
 
-[`.claude/skills/telegram-scraper/SKILL.md`](.claude/skills/telegram-scraper/SKILL.md) teaches an agent when and how
+[`.claude/skills/telegram-scraper/SKILL.md`](https://github.com/specialteam/TelegramScraper/blob/main/.claude/skills/telegram-scraper/SKILL.md) teaches an agent when and how
 to use the CLI (commands, JSON schema, how to cite results). Install it for all your projects:
 
 ```bash
@@ -314,14 +315,14 @@ For claude.ai, zip the `telegram-scraper` folder and upload it under **Settings 
 - *"Search @xyz for 'airdrop' and give me the dates and links."*
 - *"Export the last 1000 posts of t.me/abc to Excel."*
 
-Other agents: [`AGENTS.md`](AGENTS.md) and [`llms.txt`](llms.txt) describe the project for LLMs.
+Other agents: [`AGENTS.md`](https://github.com/specialteam/TelegramScraper/blob/main/AGENTS.md) and [`llms.txt`](https://github.com/specialteam/TelegramScraper/blob/main/llms.txt) describe the project for LLMs.
 
 ---
 
 ## 🖥 Web dashboard
 
 ```bash
-pip install "tgscraper[dashboard] @ git+https://github.com/specialteam/TelegramScraper"
+pip install "telegram-channel-scraper[dashboard]"
 tgscraper dashboard            # → http://localhost:8501
 ```
 
@@ -400,7 +401,7 @@ rates reasonable. This project is not affiliated with Telegram.
 </div>
 
 ```bash
-pip install "tgscraper[all] @ git+https://github.com/specialteam/TelegramScraper"
+pip install "telegram-channel-scraper[all]"
 ```
 
 <div dir="rtl">

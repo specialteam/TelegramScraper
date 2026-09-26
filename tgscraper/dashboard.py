@@ -1,4 +1,4 @@
-"""Web dashboard. Run with ``tgscraper dashboard`` (needs ``pip install 'tgscraper[dashboard]'``)."""
+"""Web dashboard. Run with ``tgscraper dashboard`` (needs ``pip install 'telegram-channel-scraper[dashboard]'``)."""
 from __future__ import annotations
 
 import datetime as dt

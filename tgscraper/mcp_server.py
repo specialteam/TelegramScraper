@@ -13,7 +13,7 @@ except ImportError:
     try:  # mcp 1.x
         from mcp.server.fastmcp import FastMCP
     except ImportError as exc:  # pragma: no cover
-        raise ImportError("The MCP server needs the 'mcp' package: pip install 'tgscraper[mcp]'") from exc
+        raise ImportError("The MCP server needs the 'mcp' package: pip install 'telegram-channel-scraper[mcp]'") from exc
 
 from .analytics import summarize
 from .client import AsyncScraper, ScraperError

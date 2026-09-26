@@ -1,0 +1,39 @@
+name: Publish to PyPI
+
+# Push a tag like v2.0.0 (or run manually) to build and upload to https://pypi.org/p/telegram-channel-scraper.
+# Uses PyPI Trusted Publishing — no API token stored in GitHub.
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+    - run: pip install build twine
+    - run: python -m build
+    - run: twine check dist/*
+    - uses: actions/upload-artifact@v4
+      with:
+        name: dist
+        path: dist/
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/telegram-channel-scraper
+    permissions:
+      id-token: write
+    steps:
+    - uses: actions/download-artifact@v4
+      with:
+        name: dist
+        path: dist/
+    - uses: pypa/gh-action-pypi-publish@release/v1

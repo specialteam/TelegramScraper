@@ -108,7 +108,7 @@ def build_parser() -> argparse.ArgumentParser:
     p = sub.add_parser("mcp", help="run the MCP server (stdio) so AI assistants can use tgscraper")
     p.add_argument("--transport", default="stdio", choices=["stdio", "sse", "streamable-http"])
 
-    sub.add_parser("dashboard", help="open the web dashboard (needs tgscraper[dashboard])")
+    sub.add_parser("dashboard", help="open the web dashboard (needs telegram-channel-scraper[dashboard])")
     return parser
 
 
@@ -255,7 +255,7 @@ def _dashboard() -> None:
     try:
         import streamlit  # noqa: F401
     except ImportError:
-        print("Dashboard needs streamlit: pip install 'tgscraper[dashboard]'", file=sys.stderr)
+        print("Dashboard needs streamlit: pip install 'telegram-channel-scraper[dashboard]'", file=sys.stderr)
         raise SystemExit(1)
     app = Path(__file__).with_name("dashboard.py")
     raise SystemExit(subprocess.call([sys.executable, "-m", "streamlit", "run", str(app)]))
