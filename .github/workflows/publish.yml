@@ -1,9 +1,12 @@
 name: Publish to PyPI
 
-# Push a tag like v2.0.0 (or run manually) to build and upload to https://pypi.org/p/telegram-channel-scraper.
-# Uses PyPI Trusted Publishing — no API token stored in GitHub.
+# Releases https://pypi.org/p/telegram-channel-scraper with PyPI Trusted Publishing (no API token stored).
+# To release: bump `version` in pyproject.toml and merge to main (or push a v* tag, or run manually).
+# An already-published version is skipped, so unrelated edits to pyproject.toml are harmless.
 on:
   push:
+    branches: [main]
+    paths: [pyproject.toml, .github/workflows/publish.yml]
     tags: ["v*"]
   workflow_dispatch:
 
@@ -37,3 +40,5 @@ jobs:
         name: dist
         path: dist/
     - uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        skip-existing: true
