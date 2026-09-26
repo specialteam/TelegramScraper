@@ -1,0 +1,23 @@
+# Telegram Scraper (tgscraper)
+
+> Python library, CLI and MCP server that scrapes PUBLIC Telegram channels through the web preview
+> (https://t.me/s/<channel>) — no API key, login or phone number. Returns structured posts (text, date, views,
+> reactions, media, hashtags, links), supports search, date/keyword filters, JSON/CSV/Excel/SQLite export,
+> incremental scraping, monitoring with webhooks, media download and analytics.
+
+Install: `pip install "tgscraper[all] @ git+https://github.com/specialteam/TelegramScraper"`
+MCP server: `uvx --from "tgscraper[mcp] @ git+https://github.com/specialteam/TelegramScraper" tgscraper-mcp`
+
+## Docs
+- [README](README.md): features, CLI, Python API, MCP setup for Claude/Cursor/VS Code, Docker, FAQ
+- [Agent skill](.claude/skills/telegram-scraper/SKILL.md): task → command table and JSON output schema
+- [AGENTS.md](AGENTS.md): how to work on this codebase
+
+## Key API
+- `tgscraper <channel> -n 20 --json`, `tgscraper search <channel> <query>`, `tgscraper info|stats|media|watch|mcp|dashboard`
+- `tgscraper.scrape(channel, limit, since=, until=, keywords=, query=, media_only=, min_views=, incremental=)`
+- `tgscraper.scrape_many`, `search`, `channel_info`, `get_message`, `export`, `load`, `summarize`, `download_media`, `watch`
+- MCP tools: get_channel_info, get_messages, search_messages, get_message, get_new_messages, analyze_channel, compare_channels, export_messages
+
+## Limits
+- Only public channels with web preview enabled; no private chats, groups, comments or member lists.

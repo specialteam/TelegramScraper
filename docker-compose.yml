@@ -1,0 +1,16 @@
+services:
+  # Web dashboard on http://localhost:8501
+  dashboard:
+    build: .
+    entrypoint: ["python", "-m", "streamlit", "run", "/usr/local/lib/python3.12/site-packages/tgscraper/dashboard.py",
+                 "--server.address=0.0.0.0", "--server.port=8501"]
+    ports: ["8501:8501"]
+    volumes: ["./data:/data"]
+
+  # Example monitor: forwards new posts to a webhook and archives them in SQLite
+  watch:
+    build: .
+    command: ["watch", "durov", "--interval", "300", "--save", "/data/archive.db"]
+    volumes: ["./data:/data"]
+    restart: unless-stopped
+    profiles: ["watch"]

@@ -1,2 +1,2 @@
-requests
-beautifulsoup4
+httpx[socks]>=0.27
+beautifulsoup4>=4.11
